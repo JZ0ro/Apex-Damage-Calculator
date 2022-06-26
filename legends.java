@@ -2,7 +2,7 @@ public class legends {
     
     private String legendName = "";
     private Integer currentHealth = 0;
-    private String currentArmour = "White Evo Shield";
+    private String currentArmour = "";
     private String fortifiedStatus = "None";
 
     public legends (String legendName, Integer currentHealth, String currentArmour, String fortifiedStatus) {
