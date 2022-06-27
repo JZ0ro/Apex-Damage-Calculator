@@ -1,11 +1,16 @@
-public class legends {
+import java.util.Scanner;
+
+public class legends extends Weapons {
     
     private String legendName = "";
     private Integer currentHealth = 0;
     private String currentArmour = "";
-    private String fortifiedStatus = "None";
+    private Boolean fortifiedStatus = false;
+    private String weaponUsed = "";
 
-    public legends (String legendName, Integer currentHealth, String currentArmour, String fortifiedStatus) {
+    public legends (String legendName, Integer currentHealth, String currentArmour, Boolean fortifiedStatus) {
+        //REMIND: create more conditionals to account for incorrect arguements
+        //Remind: Incorrect arguements examples: Integer for current Armour
         if (legendName == null || currentHealth == null || currentArmour == null || currentArmour == null || fortifiedStatus == null) {
             System.out.println("One of args given is null");
             throw new NullPointerException();
@@ -29,8 +34,51 @@ public class legends {
         return currentArmour;
     }
 
-    public String getFortifiedStatus () {
+    public Boolean getFortifiedStatus () {
         return fortifiedStatus;
+    }
+
+    public String getWeaponUsed() {
+        return weaponUsed;
+    }
+
+    public String getShotsToDown () {
+        Scanner currentGun = new Scanner(System.in);
+        System.out.println("What gun are you using?");
+
+        String inputtedGun = currentGun.nextLine();
+        weaponUsed = inputtedGun;
+        
+        System.out.println("How comprehensive do you want your calculation to be?");
+        System.out.println("Do you want to account for the best case, worst case, or custom? input q to exit.");
+        Scanner scanner = new Scanner(System.in);
+
+        String desiredCalc = scanner.nextLine();
+        if (desiredCalc.equals("best case")) {
+            return "It will take " + bestCaseCalculation() + " to down " + getLegendName();
+        } else if (desiredCalc.equals("worst case")) {
+            return desiredCalc;
+        } else if (desiredCalc.equals("custom")) {
+            return desiredCalc;
+        } else if (desiredCalc.equals("q")) {
+            return "";
+        } else {
+            return "Incorrect input given, please choose which case you desire. Note, input required is case sensitive";
+        }
+    }
+    /**
+     * bestCaseCalculation calculates the shots required to down a legend
+     * when all shots fired are headshots
+     * @return
+     */
+    private Integer bestCaseCalculation() {
+        Integer 
+        //Best case scenario when legend only has white armor, full HP and is not fortified
+        if (getCurrentArmour().equals("White Evo Shield") && getCurrentHealth() == 100 && getFortifiedStatus() != true) {
+            
+            return 
+        }
+
     }
     
 }
