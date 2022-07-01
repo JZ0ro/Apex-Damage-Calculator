@@ -1,3 +1,12 @@
+/**
+ * legends.java creates the legends we will be taking information
+ * from such as their health, armor, and fortified status.
+ * This class will have acess to calculator methods which
+ * will calculate the damage required to kill a legend based off 
+ * three choices, a best case, worst case, and custom case.
+ * Actual calculations overhauled to a different classes.
+ */
+
 import java.util.Scanner;
 
 public class legends extends Weapons {
@@ -68,12 +77,12 @@ public class legends extends Weapons {
     }
     /**
      * bestCaseCalculation calculates the shots required to down a legend
-     * when all shots fired are headshots
+     * when all shots fired are headshots on a white helmet
      * @return
      */
-    private Integer bestCaseCalculation() {
-        Integer 
+    public Integer bestCaseCalculatorInteger() { 
         //Best case scenario when legend only has white armor, full HP and is not fortified
+        Integer damageRequired = 0;
         if (getCurrentArmour().equals("White Evo Shield") && getCurrentHealth() == 100 && getFortifiedStatus() != true) {
             
             return 
