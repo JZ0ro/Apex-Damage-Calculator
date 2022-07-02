@@ -20,7 +20,7 @@ abstract class Weapons {
      Integer [] weaponDamageValues = {18, 18, 20, 14, 16, 14, 11, 17, 13, 15, 
         17, 18, 26, 36, 63, 57, 60, 90, 55, 140, 70, 63, 112, 45, 99, 12, 18, 45};
     
-    private final int headshotMultiplier = 
+    //private final int headshotMultiplier = 
 
 
 
@@ -29,7 +29,7 @@ abstract class Weapons {
         return "There are currently " + weaponDamageValues.length + " weapons in the game.";
     }
     
-    public String
+    //public String
 
 
     

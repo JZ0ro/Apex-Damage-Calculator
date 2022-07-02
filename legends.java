@@ -16,7 +16,35 @@ public class legends extends Weapons {
     private String currentArmour = "";
     private Boolean fortifiedStatus = false;
     private String weaponUsed = "";
-
+    
+    /*
+     * Default constructor that instantiates a legend object
+     * When called, constructor asks for legend in question
+     * and gives said legend all white/basic armor.
+     */
+    public legends() {
+        Scanner currentLegend = new Scanner(System.in);
+        System.out.println("What legend are you currently shooting at right now?");
+        
+        String legendBeingShot = currentLegend.nextLine();
+        legendName = legendBeingShot;
+        currentHealth = 100;
+        currentArmour = "White Evo Shield";
+        
+        if(legendName.equals("Gibraltar") || legendName.equals("Caustic")) {
+            fortifiedStatus = true;
+        }
+        getShotsToDown();
+    }
+    /**
+     * Custom constructor that instantiates a 
+     * legend object with given argumenets
+     *
+     *  @param legendName The legends current named
+     * @param currentHealth The legends current health
+     * @param currentArmour The legends current Armor
+     * @param fortifiedStatus The legends fortified Status
+     */
     public legends (String legendName, Integer currentHealth, String currentArmour, Boolean fortifiedStatus) {
         //REMIND: create more conditionals to account for incorrect arguements
         //Remind: Incorrect arguements examples: Integer for current Armour
@@ -28,6 +56,8 @@ public class legends extends Weapons {
             this.currentHealth = currentHealth;
             this.currentArmour = currentArmour;
             this.fortifiedStatus = fortifiedStatus;
+
+            getShotsToDown();
         }
     }
 
@@ -80,12 +110,16 @@ public class legends extends Weapons {
      * when all shots fired are headshots on a white helmet
      * @return
      */
-    public Integer bestCaseCalculatorInteger() { 
+    public Integer bestCaseCalculation() { 
         //Best case scenario when legend only has white armor, full HP and is not fortified
         Integer damageRequired = 0;
-        if (getCurrentArmour().equals("White Evo Shield") && getCurrentHealth() == 100 && getFortifiedStatus() != true) {
-            
-            return 
+        if (getCurrentArmour().equals("White Evo Shield") && getCurrentHealth() == 100 && getFortifiedStatus() == false) {
+            damageRequired += 1;
+            System.out.println(damageRequired);
+            return damageRequired;
+        } else {
+            System.out.println(damageRequired);
+            return damageRequired;
         }
 
     }
