@@ -29,7 +29,7 @@ public class legends extends Weapons {
         String legendBeingShot = currentLegend.nextLine();
         legendName = legendBeingShot;
         currentHealth = 100;
-        currentArmour = "White Evo Shield";
+        currentArmour = "White Evo";
         
         if(legendName.equals("Gibraltar") || legendName.equals("Caustic")) {
             fortifiedStatus = true;
@@ -57,6 +57,9 @@ public class legends extends Weapons {
             this.currentArmour = currentArmour;
             this.fortifiedStatus = fortifiedStatus;
 
+            System.out.println("The current legend selected is " + getLegendName());
+            System.out.println("");
+
             getShotsToDown();
         }
     }
@@ -82,19 +85,23 @@ public class legends extends Weapons {
     }
 
     public String getShotsToDown () {
+        String shotsToDown = "";
         Scanner currentGun = new Scanner(System.in);
         System.out.println("What gun are you using?");
 
         String inputtedGun = currentGun.nextLine();
         weaponUsed = inputtedGun;
         
-        System.out.println("How comprehensive do you want your calculation to be?");
-        System.out.println("Do you want to account for the best case, worst case, or custom? input q to exit.");
+
+        System.out.println("Where on the legend are you shooting? The body, legs or custom");
         Scanner scanner = new Scanner(System.in);
 
+
         String desiredCalc = scanner.nextLine();
-        if (desiredCalc.equals("best case")) {
-            return "It will take " + bestCaseCalculation() + " to down " + getLegendName();
+        if (desiredCalc.equals("The body") || desiredCalc.equals("body")) {
+            shotsToDown = "It will take " + bodyShotCalculator(getWeaponUsed(), getCurrentHealth(), getCurrentArmour(), getLegendName()) + " shots to down " + getLegendName();
+            System.out.println(shotsToDown);
+            return shotsToDown;
         } else if (desiredCalc.equals("worst case")) {
             return desiredCalc;
         } else if (desiredCalc.equals("custom")) {
@@ -104,6 +111,7 @@ public class legends extends Weapons {
         } else {
             return "Incorrect input given, please choose which case you desire. Note, input required is case sensitive";
         }
+
     }
     /**
      * bestCaseCalculation calculates the shots required to down a legend
@@ -114,8 +122,7 @@ public class legends extends Weapons {
         //Best case scenario when legend only has white armor, full HP and is not fortified
         Integer damageRequired = 0;
         if (getCurrentArmour().equals("White Evo Shield") && getCurrentHealth() == 100 && getFortifiedStatus() == false) {
-            damageRequired += 1;
-            System.out.println(damageRequired);
+            damageRequired += 1; // delete later, damageRequired var only used to test if method outputted values
             return damageRequired;
         } else {
             System.out.println(damageRequired);

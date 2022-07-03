@@ -5,7 +5,9 @@ public class Damage_Calculator  {
         //System.out.println(BloodHound.getCurrentArmour());
         //System.out.println(BloodHound.getShotsToDown());
         System.out.println(BloodHound.getShotsToDown());**/
-       legends test1 = new legends();
+       //legends test = new legends();
+
+       legends BloodHound = new legends ("BloodHound", 100, "Gold Evo", false);
 
     }
 }
