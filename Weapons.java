@@ -23,12 +23,15 @@ abstract class Weapons {
     String [] useableShields = {"White Evo", "Blue Evo", "Purple Evo", "Gold Evo", "Red Evo"};
 
     Integer [] shieldHealthValues = {50, 75, 100, 100, 125};
+
+    private final Double fortifiedModifier = 0.15;
     
     //private final int headshotMultiplier = 
 
     public Integer bodyShotCalculator(String currentWeapon, Integer currentHealth, String currentArmor, String currentLegend) {
         
         Integer totalHealthLeft = 0;
+        Double fortifiedLegendHealth = 0.0;
         Integer weaponDamage = 0;
         Integer shotsFired = 0;
 
@@ -42,14 +45,26 @@ abstract class Weapons {
         for(int i = 0; i < useableShields.length; i++) {
             if (currentArmor.equals(useableShields[i])) {
                 totalHealthLeft = currentHealth + shieldHealthValues[i];
+                fortifiedLegendHealth = (double) currentHealth.intValue() + shieldHealthValues[i];
             }
         }
+        
+        
         if (currentLegend.equals("Gibraltar") || currentLegend.equals("Caustic")) {
-            
-        }
-        while (totalHealthLeft >= 0) {
+
+            Double fortifiedWeaponDamage = ((double)weaponDamage.intValue() - ((double) weaponDamage.intValue() * fortifiedModifier)); 
+
+            while (fortifiedLegendHealth >= 0.0) {
+                fortifiedLegendHealth = fortifiedLegendHealth - fortifiedWeaponDamage;
+                shotsFired += 1;
+            }
+        } 
+        
+        else {
+            while (totalHealthLeft >= 0) {
             totalHealthLeft = totalHealthLeft - weaponDamage;
             shotsFired += 1;
+        }
         }
         
         return shotsFired;
@@ -57,10 +72,11 @@ abstract class Weapons {
 
     }
 
+    //public Integer legShotCalculator (String currentWeapon, Integer currentHealth, String currentArmor, String currentLegend) {
 
-    public String getNumberOfWeapons() {
-        return "There are currently " + weaponDamageValues.length + " weapons in the game.";
-    }
+    //}
+
+   
     
     //public String
 

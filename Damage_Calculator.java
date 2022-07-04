@@ -7,7 +7,8 @@ public class Damage_Calculator  {
         System.out.println(BloodHound.getShotsToDown());**/
        //legends test = new legends();
 
-       legends BloodHound = new legends ("BloodHound", 100, "Gold Evo", false);
+       legends Gibraltar = new legends ("Gibraltar", 100,"Red Evo");
+       //legends Wraith = new legends ("Wraith", 100, "Red Evo");
 
     }
 }
