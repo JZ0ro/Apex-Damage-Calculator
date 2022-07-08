@@ -25,12 +25,23 @@ public class legends extends Weapons {
         Scanner currentLegend = new Scanner(System.in);
         System.out.println("What legend are you currently shooting at right now?");
         
+        
         String legendBeingShot = currentLegend.nextLine();
         legendName = legendBeingShot;
-        currentHealth = 100;
-        currentArmour = "White Evo";
         
-
+       
+        System.out.println("");
+        System.out.println("How much health does " + legendName + " have? Please enter a value");
+        Integer legendShotHealth = Integer.parseInt(currentLegend.nextLine());
+        currentHealth = legendShotHealth;
+        
+        
+        System.out.println("");
+        System.out.println("What kind of armor does " + legendName + " have? White, Blue, Purple, Gold, or Red");
+        String legendShotArmor = currentLegend.nextLine();
+        currentArmour = legendShotArmor;
+        
+        System.out.println("");
         getShotsToDown();
     }
     /**
@@ -103,7 +114,7 @@ public class legends extends Weapons {
             System.out.println("");
             
             shotsToDown = "It will take " + 
-            bodyShotCalculator(getWeaponUsed(), getCurrentHealth(), getCurrentArmour(), getLegendName()) + " shots to down " + getLegendName();
+            legShotCalculator(getWeaponUsed(), getCurrentHealth(), getCurrentArmour(), getLegendName()) + " shots to down " + getLegendName();
             
             System.out.println(shotsToDown);
             return shotsToDown;
@@ -116,23 +127,6 @@ public class legends extends Weapons {
         } 
         else {
             return "Incorrect input given, please choose which case you desire. Note, input required is case sensitive";
-        }
-
-    }
-    /**
-     * bestCaseCalculation calculates the shots required to down a legend
-     * when all shots fired are headshots on a white helmet
-     * @return
-     */
-    private Integer bestCaseCalculation() { //REMINDER: DELETE THIS METHOD AS THIS FUNCTION AS BEEN OUTSOURCED TO ABSTRACT CLASS
-        //Best case scenario when legend only has white armor, full HP and is not fortified
-        Integer damageRequired = 0;
-        if (getCurrentArmour().equals("White Evo Shield") && getCurrentHealth() == 100) {
-            damageRequired += 1; // delete later, damageRequired var only used to test if method outputted values
-            return damageRequired;
-        } else {
-            System.out.println(damageRequired);
-            return damageRequired;
         }
 
     }
