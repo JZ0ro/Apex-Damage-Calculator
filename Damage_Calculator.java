@@ -18,6 +18,7 @@ public class Damage_Calculator  {
       
        boolean quit = false;
         while (quit != true) {
+        System.out.println("");
         System.out.println("Would you like to try a calculation for a different legend?");
         System.out.println("If yes, input yes, else input no");
 

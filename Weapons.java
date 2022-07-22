@@ -39,6 +39,8 @@ abstract class Weapons {
     Integer [] shieldHealthValues = {50, 75, 100, 100, 125};
 
     private final Double fortifiedModifier = 0.15;
+
+    private boolean armorSlangGiven = false;
     
     //private final int headshotMultiplier = 
 
@@ -55,19 +57,30 @@ abstract class Weapons {
                 break;
             }
         }
+            
+        if (currentArmor.equals("white") || (currentArmor.equals("white ") || (currentArmor.equals(" white")))) {
+                currentArmor = useableShields[0];
+        } else if (currentArmor.equals("blue") || (currentArmor.equals("blue ") || (currentArmor.equals(" blue")))) {
+            currentArmor = useableShields[1];
+        } else if(currentArmor.equals("purple") || (currentArmor.equals("purple ") || (currentArmor.equals(" purple")))) {
+            currentArmor = useableShields[2];
+        } else if (currentArmor.equals("gold") || (currentArmor.equals("gold ") || (currentArmor.equals(" gold")))) {
+            currentArmor = useableShields[3];
+        } else if (currentArmor.equals("red") || (currentArmor.equals("red ") || (currentArmor.equals(" red")))) {
+            currentArmor = useableShields[4];
+        } else {
+            System.out.println("Error, armor inputted is not in the game. Please try again");
+        }
 
-        for(int i = 0; i < useableShields.length; i++) {
+        for (int i = 0; i < useableShields.length; i++) {
             if (currentArmor.equals(useableShields[i])) {
                 totalHealthLeft = currentHealth + shieldHealthValues[i];
                 fortifiedLegendHealth = (double) currentHealth.intValue() + shieldHealthValues[i];
             }
         }
-        
-        
+       
         if (currentLegend.equals("Gibraltar") || currentLegend.equals("Caustic")) {
-
             Double fortifiedWeaponDamage = ((double)weaponDamage.intValue() - ((double) weaponDamage.intValue() * fortifiedModifier)); 
-
             while (fortifiedLegendHealth >= 0.0) {
                 fortifiedLegendHealth = fortifiedLegendHealth - fortifiedWeaponDamage;
                 shotsFired += 1;
@@ -78,12 +91,9 @@ abstract class Weapons {
             while (totalHealthLeft >= 0) {
             totalHealthLeft = totalHealthLeft - weaponDamage;
             shotsFired += 1;
+            }
         }
-        }
-        
         return shotsFired;
-
-
     }
 
     public Integer legShotCalculator (String currentWeapon, Integer currentHealth, String currentArmor, String currentLegend) {
@@ -106,6 +116,46 @@ abstract class Weapons {
             }
         }
         
+        if (currentLegend.equals("Gibraltar") || currentLegend.equals("Caustic")) {
+
+            Double fortifiedWeaponDamage = ((double)weaponDamage.intValue() - ((double) weaponDamage.intValue() * fortifiedModifier)); 
+
+            while (fortifiedLegendHealth >= 0.0) {
+                fortifiedLegendHealth = fortifiedLegendHealth - fortifiedWeaponDamage;
+                shotsFired += 1;
+            }
+        } 
+        
+        else {
+            while (totalHealthLeft >= 0) {
+            totalHealthLeft = totalHealthLeft - weaponDamage;
+            shotsFired += 1;
+        }
+        }
+        
+        return shotsFired;
+    }
+
+    public Integer headShotCalculator (String currentWeapon, Integer currentHealth, String currentArmor, String currentLegend) {
+        Integer totalHealthLeft = 0;
+        Double fortifiedLegendHealth = 0.0;
+        Integer weaponDamage = 0;
+        Integer shotsFired = 0;
+
+        for (int i = 0; i < useableWeapons.length; i++) {
+            if (currentWeapon.equals(useableWeapons[i])) {
+                weaponDamage = headShotDamageValues[i];
+                break;
+            }
+        }
+
+        for(int i = 0; i < useableShields.length; i++) {
+            if (currentArmor.equals(useableShields[i])) {
+                totalHealthLeft = currentHealth + shieldHealthValues[i];
+                fortifiedLegendHealth = (double) currentHealth.intValue() + shieldHealthValues[i];
+            }
+        }
+        
         
         if (currentLegend.equals("Gibraltar") || currentLegend.equals("Caustic")) {
 
@@ -127,9 +177,11 @@ abstract class Weapons {
         return shotsFired;
     }
 
+
+
    
     
-    //public String
+
 
 
     

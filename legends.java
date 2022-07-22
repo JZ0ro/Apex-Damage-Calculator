@@ -37,13 +37,15 @@ public class legends extends Weapons {
         
         
         System.out.println("");
-        System.out.println("What kind of armor does " + legendName + " have? White, Blue, Purple, Gold, or Red");
+        System.out.println("What kind of armor does " + legendName + " have?");
+        System.out.println("Choose from the following: white, blue, purple, gold, or red armor");
         String legendShotArmor = currentLegend.nextLine();
         currentArmour = legendShotArmor;
         
         System.out.println("");
         getShotsToDown();
     }
+    
     /**
      * Custom constructor that instantiates a 
      * legend object with given argumenets
@@ -52,7 +54,7 @@ public class legends extends Weapons {
      * @param currentHealth The legends current health
      * @param currentArmour The legends current Armor
      */
-    public legends (String legendName, Integer currentHealth, String currentArmour) {
+    /**public legends (String legendName, Integer currentHealth, String currentArmour) {
         //REMIND: create more conditionals to account for incorrect arguements
         //Remind: Incorrect arguements examples: Integer for current Armour
         if (legendName == null || currentHealth == null || currentArmour == null || currentArmour == null) {
@@ -68,7 +70,7 @@ public class legends extends Weapons {
 
             getShotsToDown();
         }
-    }
+    }*/
 
     public String getLegendName () {
         return legendName;
@@ -86,10 +88,18 @@ public class legends extends Weapons {
         return weaponUsed;
     }
 
+    
+    /**
+     * Getter method that gets the
+     * shots to down the inputted legend
+     * 
+     * @return returns the shots to down the inputted legend
+     */
     private String getShotsToDown () {
         String shotsToDown = "";
         Scanner currentGun = new Scanner(System.in);
         System.out.println("What gun are you using?");
+        System.out.println("Note: Please type the selected weapon with a capital letter first");
 
         
         String inputtedGun = currentGun.nextLine();
@@ -101,6 +111,8 @@ public class legends extends Weapons {
 
 
         String desiredCalc = scanner.nextLine();        
+        
+        // if user is shooting a legend in the body
         if (desiredCalc.equals("The body") || desiredCalc.equals("body")) {
             System.out.println("");
             
@@ -110,6 +122,8 @@ public class legends extends Weapons {
             System.out.println(shotsToDown);
             return shotsToDown;
         } 
+        
+        // if user is shooting a legend in the legs
         else if (desiredCalc.equals("legs")) {
             System.out.println("");
             
@@ -119,12 +133,29 @@ public class legends extends Weapons {
             System.out.println(shotsToDown);
             return shotsToDown;
         } 
+        
+        // if user is shooting a legend in a custom situation
         else if (desiredCalc.equals("custom")) {
             return shotsToDown;
+        }
+        
+        // if user is shooting a legend in the head
+        else if (desiredCalc.equals("head")) {
+            System.out.println("");
+            
+            shotsToDown = "It will take " + 
+            headShotCalculator(getWeaponUsed(), getCurrentHealth(), getCurrentArmour(), getLegendName()) + " shots to down " + getLegendName();
+            
+            System.out.println(shotsToDown);
+            return shotsToDown; 
         } 
+        
+        // if a user wishes to quit
         else if (desiredCalc.equals("q")) {
             return "";
         } 
+        
+        
         else {
             return "Incorrect input given, please choose which case you desire. Note, input required is case sensitive";
         }
