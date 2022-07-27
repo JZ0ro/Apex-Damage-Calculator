@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * Weapons.java contains the possible damage outputs for all the
  * equipable weapons in Apex legends. The damage outputs for each
@@ -32,18 +34,27 @@ abstract class Weapons {
     Integer [] headShotDamageValues = {32, 32, 35, 25, 24, 21, 17, 26, 20, 
     23, 26, 27, 39, 72, 111, 100, 105, 101, 118, 280, 140, 72, 144, 57, 121, 18, 27, 97};
 
-    
-
     String [] useableShields = {"White Evo", "Blue Evo", "Purple Evo", "Gold Evo", "Red Evo"};
 
     Integer [] shieldHealthValues = {50, 75, 100, 100, 125};
 
     private final Double fortifiedModifier = 0.15;
 
-    private boolean armorSlangGiven = false;
     
-    //private final int headshotMultiplier = 
 
+    
+    
+    /**
+     * bodyShotCalculator calculates the body shots
+     * required to down a apex legend
+     * 
+     * @param currentWeapon the current weapon used
+     * @param currentHealth the current health of the legend in question
+     * @param currentArmor the current armor of the legend in question
+     * @param currentLegend the current legend in question 
+     * 
+     * @return returns the body shots required to take down an apex legend
+     */
     public Integer bodyShotCalculator(String currentWeapon, Integer currentHealth, String currentArmor, String currentLegend) {
         
         Integer totalHealthLeft = 0;
@@ -58,19 +69,7 @@ abstract class Weapons {
             }
         }
             
-        if (currentArmor.equals("white") || (currentArmor.equals("white ") || (currentArmor.equals(" white")))) {
-                currentArmor = useableShields[0];
-        } else if (currentArmor.equals("blue") || (currentArmor.equals("blue ") || (currentArmor.equals(" blue")))) {
-            currentArmor = useableShields[1];
-        } else if(currentArmor.equals("purple") || (currentArmor.equals("purple ") || (currentArmor.equals(" purple")))) {
-            currentArmor = useableShields[2];
-        } else if (currentArmor.equals("gold") || (currentArmor.equals("gold ") || (currentArmor.equals(" gold")))) {
-            currentArmor = useableShields[3];
-        } else if (currentArmor.equals("red") || (currentArmor.equals("red ") || (currentArmor.equals(" red")))) {
-            currentArmor = useableShields[4];
-        } else {
-            System.out.println("Error, armor inputted is not in the game. Please try again");
-        }
+        currentArmor = armorSlangTranslator (currentArmor);
 
         for (int i = 0; i < useableShields.length; i++) {
             if (currentArmor.equals(useableShields[i])) {
@@ -177,6 +176,120 @@ abstract class Weapons {
         return shotsFired;
     }
 
+    public String customShotCalculator (String currentWeapon, Integer currentHealth, String currentArmor, String currentLegend) {
+        int totalHealthLeft = 0;
+        Double fortifiedLegendHealth = 0.0;
+        Integer weaponDamage = 0;
+    
+        Integer bodyShotsGiven = 0;
+        Integer legShotsGiven = 0;
+        Integer headShotGiven = 0;
+
+        System.out.println("");
+        System.out.println("You have selected custom!");
+        System.out.println("");
+    
+        System.out.println("How many body shots  have you hit on the legend?");
+        
+        Scanner bodyShotscanner = new Scanner(System.in);
+        bodyShotsGiven = bodyShotscanner.nextInt();
+
+        System.out.println("How many leg shots have you hit on the legend?");
+
+        Scanner legShotScanner = new Scanner(System.in);
+        legShotsGiven = legShotScanner.nextInt();
+
+        System.out.println("How many head shots have you hit on the legend?");
+
+        Scanner headShotScanner = new Scanner(System.in);
+        headShotGiven = headShotScanner.nextInt();
+
+        //token used to get specific weapon damage values
+        Integer currentWeaponToken = 0;
+
+        for (int i = 0; i < useableWeapons.length; i++) {
+            if (currentWeapon.equals(useableWeapons[i])) {
+                currentWeaponToken = i;
+                break;
+            }
+        }
+
+        currentArmor = armorSlangTranslator(currentArmor);
+
+        for(int i = 0; i < useableShields.length; i++) {
+            if (currentArmor.equals(useableShields[i])) {
+                totalHealthLeft = currentHealth + shieldHealthValues[i];
+                fortifiedLegendHealth = (double) currentHealth.intValue() + shieldHealthValues[i];
+            }
+        }
+
+        int bodyShotDamageGiven = 0;
+        int legShotDamageGiven = 0;
+        int headShotDamageGiven = 0;
+        
+        if (bodyShotsGiven > 0) {
+            for (int i = 0; i < bodyShotsGiven; i++) {
+                bodyShotDamageGiven += bodyShotDamageValues[currentWeaponToken];
+            }
+        } if (legShotsGiven > 0) {
+            for (int i = 0; i < bodyShotsGiven; i++) {
+                legShotDamageGiven += legShotDamageValues[currentWeaponToken];
+            }
+        } if (headShotGiven > 0) {
+            for (int i = 0; i < headShotGiven; i++) {
+                headShotDamageGiven += headShotDamageValues[currentWeaponToken];
+            }
+        }
+        
+        int totalShots = bodyShotsGiven + legShotsGiven + headShotGiven;
+        int totalDamage = bodyShotDamageGiven + legShotDamageGiven + headShotDamageGiven;
+        int healthAfterHit  = Math.abs(totalDamage - totalHealthLeft);
+        
+        String customShotOutput = "You Shot a total of " + totalShots + " on " + 
+        currentLegend +  " and did a total of " + totalDamage + " damage.";
+
+        if (totalDamage > totalHealthLeft) {
+            
+            String deathReport = "The legend in question was killed " +
+            "as the legend received " + totalDamage
+             + "  damage which was greater than his pool of health being " + totalHealthLeft;
+            
+             return customShotOutput + " " +  deathReport;
+        } else {
+            String deathReport = "The legend in question was " +
+            "not killed after receiving " + totalShots + " shots as he still has " +
+            healthAfterHit + " health left. The legend would've been dead if ";
+
+
+            return customShotOutput + " " +  deathReport;
+
+        }
+    }
+
+    private String armorSlangTranslator (String armorSlang) {
+    String translatedArmor = "";
+    if (armorSlang.equals("white") || (armorSlang.equals("white ") || (armorSlang.equals(" white")))) {
+        translatedArmor = useableShields[0];
+        return translatedArmor;
+    } else if (armorSlang.equals("blue") || (armorSlang.equals("blue ") || (armorSlang.equals(" blue")))) {
+        translatedArmor = useableShields[1];
+        return translatedArmor;
+    } else if(armorSlang.equals("purple") || (armorSlang.equals("purple ") || (armorSlang.equals(" purple")))) {
+        translatedArmor = useableShields[2];
+        return translatedArmor;
+    } else if (armorSlang.equals("gold") || (armorSlang.equals("gold ") || (armorSlang.equals(" gold")))) {
+        translatedArmor = useableShields[3];
+        return translatedArmor;
+    } else if (armorSlang.equals("red") || (armorSlang.equals("red ") || (armorSlang.equals(" red")))) {
+        armorSlang = useableShields[4];
+        return translatedArmor;
+    } else {
+        System.out.println("Error, armor inputted is not in the game. Please try again");
+        return "";
+    } 
+    }
+}
+
 
 
    
@@ -187,4 +300,3 @@ abstract class Weapons {
     
 
     
-}

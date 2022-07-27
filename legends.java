@@ -12,9 +12,20 @@ import java.util.Scanner;
 public class legends extends Weapons {
     
     private String legendName = "";
+    
     private Integer currentHealth = 0;
+   
     private String currentArmour = "";
+    
     private String weaponUsed = "";
+    
+    private Integer bodyShotsHit = 0;
+    
+    private Integer legShotsHit = 0;
+    
+    private Integer headShotsHit = 0;
+
+
     
     /*
      * Default constructor that instantiates a legend object
@@ -99,6 +110,12 @@ public class legends extends Weapons {
         String shotsToDown = "";
         Scanner currentGun = new Scanner(System.in);
         System.out.println("What gun are you using?");
+        System.out.println("");
+        System.out.println("Please choose from the following: ");
+
+        for (int i = 0; i < useableWeapons.length; i++) {
+            System.out.println(useableWeapons[i]);
+        }
         System.out.println("Note: Please type the selected weapon with a capital letter first");
 
         
@@ -106,7 +123,8 @@ public class legends extends Weapons {
         weaponUsed = inputtedGun;
         
         System.out.println("");
-        System.out.println("Where on the legend are you shooting? The body, legs, head or custom?");
+        System.out.println("Where on the legend are you shooting? The body, legs, head or");
+        System.out.println("would you like to provide a custom situtation?");
         Scanner scanner = new Scanner(System.in);
 
 
@@ -136,6 +154,9 @@ public class legends extends Weapons {
         
         // if user is shooting a legend in a custom situation
         else if (desiredCalc.equals("custom")) {
+            
+            shotsToDown = customShotCalculator(getWeaponUsed(), getCurrentHealth(), getCurrentArmour(), getLegendName());
+            System.out.println(shotsToDown);
             return shotsToDown;
         }
         
