@@ -56,32 +56,6 @@ public class legends extends Weapons {
         System.out.println("");
         getShotsToDown();
     }
-    
-    /**
-     * Custom constructor that instantiates a 
-     * legend object with given argumenets
-     *
-     *  @param legendName The legends current named
-     * @param currentHealth The legends current health
-     * @param currentArmour The legends current Armor
-     */
-    /**public legends (String legendName, Integer currentHealth, String currentArmour) {
-        //REMIND: create more conditionals to account for incorrect arguements
-        //Remind: Incorrect arguements examples: Integer for current Armour
-        if (legendName == null || currentHealth == null || currentArmour == null || currentArmour == null) {
-            System.out.println("One of args given is null");
-            throw new NullPointerException();
-        } else {
-            this.legendName = legendName;
-            this.currentHealth = currentHealth;
-            this.currentArmour = currentArmour;
-
-            System.out.println("The current legend selected is " + getLegendName());
-            System.out.println("");
-
-            getShotsToDown();
-        }
-    }*/
 
     public String getLegendName () {
         return legendName;
@@ -125,6 +99,7 @@ public class legends extends Weapons {
         System.out.println("");
         System.out.println("Where on the legend are you shooting? The body, legs, head or");
         System.out.println("would you like to provide a custom situtation?");
+        //System.out.println("NOTICE: Choosing the options of the body, legs, or head will only output the shots required to down a legend if shot at the inputted body part");
         Scanner scanner = new Scanner(System.in);
 
 
