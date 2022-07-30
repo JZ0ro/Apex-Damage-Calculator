@@ -1,4 +1,6 @@
 /**
+ * Author: JZ0ro
+ * 
  * legends.java creates the legends we will be taking information
  * from such as their health, armor, and fortified status.
  * This class will have acess to calculator methods which
@@ -10,6 +12,12 @@
 import java.util.Scanner;
 
 public class legends extends Weapons {
+
+    private String [] playableLegends = {"Wraith", "Bangalore", 
+    "Mirage", "Octane", "Revenant", "Horizon", "Fuse", "Ash", 
+    "Mad Maggie", "Fade", "Gibraltar", "Caustic", "Wattson",
+    "Rampart", "Newcastle", "Lifeline", "Loba", "Bloodhound",
+    "Pathfinder", "Crypto", "Valkyrie", "Seer"};
     
     private String legendName = "";
     
@@ -19,13 +27,6 @@ public class legends extends Weapons {
     
     private String weaponUsed = "";
     
-    private Integer bodyShotsHit = 0;
-    
-    private Integer legShotsHit = 0;
-    
-    private Integer headShotsHit = 0;
-
-
     
     /*
      * Default constructor that instantiates a legend object
@@ -33,12 +34,37 @@ public class legends extends Weapons {
      * and gives said legend all white/basic armor.
      */
     public legends() {
+        boolean invalidLegendChosen = true;
+        
+        while (invalidLegendChosen = true) {
         Scanner currentLegend = new Scanner(System.in);
         System.out.println("What legend are you currently shooting at right now?");
+        System.out.println("");
+        System.out.println("Please choose from this list");
+            for (int i = 0; i < playableLegends.length; i++) {
+                System.out.println(playableLegends[i]);
+            }
         
-        
-        String legendBeingShot = currentLegend.nextLine();
-        legendName = legendBeingShot;
+            System.out.println("");
+            
+            String legendBeingShot = currentLegend.nextLine();
+            legendName = legendBeingShot;
+
+            for (int i = 0; i < playableLegends.length; i++) {
+                if (legendName.equals(playableLegends[i])) {
+                    
+                    invalidLegendChosen = false;
+                    break;
+                }
+            } 
+
+            if (invalidLegendChosen = true) {
+                System.out.println("");
+                System.out.println("NOTICE: legend selection is case sensitive, please choose legends present in the list only");
+            } else {
+                break;
+            }
+        }
         
        
         System.out.println("");
