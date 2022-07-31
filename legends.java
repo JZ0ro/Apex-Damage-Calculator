@@ -35,9 +35,9 @@ public class legends extends Weapons {
      */
     public legends() {
         boolean invalidLegendChosen = true;
-        
-        while (invalidLegendChosen = true) {
         Scanner currentLegend = new Scanner(System.in);
+        while (invalidLegendChosen == true) {
+
         System.out.println("What legend are you currently shooting at right now?");
         System.out.println("");
         System.out.println("Please choose from this list");
@@ -47,8 +47,8 @@ public class legends extends Weapons {
         
             System.out.println("");
             
-            String legendBeingShot = currentLegend.nextLine();
-            legendName = legendBeingShot;
+            legendName = currentLegend.nextLine();
+            
 
             for (int i = 0; i < playableLegends.length; i++) {
                 if (legendName.equals(playableLegends[i])) {
@@ -56,21 +56,31 @@ public class legends extends Weapons {
                     invalidLegendChosen = false;
                     break;
                 }
-            } 
-
-            if (invalidLegendChosen = true) {
-                System.out.println("");
-                System.out.println("NOTICE: legend selection is case sensitive, please choose legends present in the list only");
-            } else {
-                break;
             }
+            
+            if (invalidLegendChosen == false) {
+                break;
+            } else {
+                System.out.println("NOTICE: legend selection is case sensitive, please choose legends present in the list only");            }
+           
         }
         
        
         System.out.println("");
-        System.out.println("How much health does " + legendName + " have? Please enter a value");
-        Integer legendShotHealth = Integer.parseInt(currentLegend.nextLine());
-        currentHealth = legendShotHealth;
+        System.out.println("How much health does " + legendName + " have? Please enter a non-negative value");
+        
+        boolean invalidLegendHealth = false;
+        while (invalidLegendHealth == false) {
+            currentHealth = Integer.parseInt(currentLegend.nextLine()); //TODO AUTOMATE USER INPUT CHECKER
+
+            if (currentHealth < 0) {
+                continue;
+            } else {
+                invalidLegendHealth = true;
+            }
+        }
+        
+        
         
         
         System.out.println("");
