@@ -69,26 +69,52 @@ public class legends extends Weapons {
         System.out.println("");
         System.out.println("How much health does " + legendName + " have? Please enter a non-negative value");
         
-        boolean invalidLegendHealth = false;
-        while (invalidLegendHealth == false) {
-            currentHealth = Integer.parseInt(currentLegend.nextLine()); //TODO AUTOMATE USER INPUT CHECKER
+        boolean invalidLegendHealth = true;
+        while (invalidLegendHealth == true) { //TODO AUTOMATE USER INPUT CHECKER
+            
+            try {
+                currentHealth = Integer.parseInt(currentLegend.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("NOTICE: Inputted health must be greater than 0, please try again");
+                continue;
+            }
+             
 
-            if (currentHealth < 0) {
+            if (currentHealth <= 0) {
                 continue;
             } else {
-                invalidLegendHealth = true;
+                invalidLegendHealth = false;
             }
         }
-        
-        
         
         
         System.out.println("");
         System.out.println("What kind of armor does " + legendName + " have?");
         System.out.println("Choose from the following: white, blue, purple, gold, or red armor");
-        String legendShotArmor = currentLegend.nextLine();
-        currentArmour = legendShotArmor;
-        
+
+        String equipableArmor [] =  { "white", "blue", "purple", "gold", "red" };
+        boolean invalidArmorSelection = true;
+
+        while (invalidArmorSelection == true) {
+            String legendShotArmor = currentLegend.nextLine();
+            
+            for (int i = 0; i < equipableArmor.length; i++) {
+                if (legendShotArmor.equals(equipableArmor[i])) {
+                    currentArmour = legendShotArmor;
+                    invalidArmorSelection = false;
+                    break;
+                }
+            }
+            
+            if (invalidArmorSelection == false) {
+                break;
+            } else {
+                System.out.print("NOTICE: armor selection is case sensitive");
+                System.out.print(", please try again");
+            }
+            
+            
+        } 
         System.out.println("");
         getShotsToDown();
     }
@@ -128,9 +154,32 @@ public class legends extends Weapons {
         }
         System.out.println("Note: Please type the selected weapon with a capital letter first");
 
+        boolean invalidArmorSelection = true;
+        while (invalidArmorSelection == true) {
+            String inputtedGun = currentGun.nextLine();
+
+            for (int i = 0; i < useableWeapons.length; i++ ) {
+                if (inputtedGun.equals(useableWeapons[i])) {
+                    weaponUsed = inputtedGun;
+                    invalidArmorSelection = false;
+                    break;
+                }
+            }
+            
+            if (invalidArmorSelection == false) {
+                break;
+            } else {
+                System.out.println("Note: weapon selection is case sensitive, please try again");
+            }
+            
+            
         
-        String inputtedGun = currentGun.nextLine();
-        weaponUsed = inputtedGun;
+
+        }
+        
+
+        
+        
         
         System.out.println("");
         System.out.println("Where on the legend are you shooting? The body, legs, head or");

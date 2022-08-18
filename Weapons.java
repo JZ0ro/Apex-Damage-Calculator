@@ -26,13 +26,13 @@ abstract class Weapons {
     *and so on and so fourth*/
     
      Integer [] bodyShotDamageValues = {18, 18, 20, 14, 16, 14, 11, 17, 13, 15, 
-    17, 18, 26, 36, 63, 57, 60, 90, 55, 140, 70, 63, 112, 45, 99, 12, 18, 45};
+    17, 18, 26, 34, 63, 57, 60, 90, 55, 140, 70, 54, 112, 45, 99, 12, 18, 45};
 
     Integer [] legShotDamageValues = {15, 14, 15, 11, 13, 11, 9, 14, 10, 13, 
-    14, 15, 22, 27, 57, 48, 54, 90, 44, 112, 63, 54, 112, 45, 99, 11, 16, 41};
+    14, 15, 22, 26, 57, 48, 54, 90, 44, 112, 63, 54, 112, 45, 99, 11, 16, 41};
     
     Integer [] headShotDamageValues = {32, 32, 35, 25, 24, 21, 17, 26, 20, 
-    23, 26, 27, 39, 72, 111, 100, 105, 101, 118, 280, 140, 72, 144, 57, 121, 18, 27, 97};
+    23, 26, 27, 39, 60, 111, 100, 105, 101, 118, 280, 140, 72, 144, 57, 121, 18, 27, 97};
 
     String [] useableShields = {"White Evo", "Blue Evo", "Purple Evo", "Gold Evo", "Red Evo"};
 
@@ -281,7 +281,7 @@ abstract class Weapons {
         translatedArmor = useableShields[3];
         return translatedArmor;
     } else if (armorSlang.equals("red") || (armorSlang.equals("red ") || (armorSlang.equals(" red")))) {
-        armorSlang = useableShields[4];
+        translatedArmor = useableShields[4];
         return translatedArmor;
     } else {
         System.out.println("Error, armor inputted is not in the game. Please try again");
