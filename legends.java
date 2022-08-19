@@ -70,7 +70,7 @@ public class legends extends Weapons {
         System.out.println("How much health does " + legendName + " have? Please enter a non-negative value");
         
         boolean invalidLegendHealth = true;
-        while (invalidLegendHealth == true) { //TODO AUTOMATE USER INPUT CHECKER
+        while (invalidLegendHealth == true) { 
             
             try {
                 currentHealth = Integer.parseInt(currentLegend.nextLine());
