@@ -26,6 +26,8 @@ public class legends extends Weapons {
     private String currentArmour = "";
     
     private String weaponUsed = "";
+
+    private String bodyPartShotAt = "";
     
     
     /*
@@ -111,6 +113,7 @@ public class legends extends Weapons {
             } else {
                 System.out.print("NOTICE: armor selection is case sensitive");
                 System.out.print(", please try again");
+                System.out.println("");
             }
             
             
@@ -184,14 +187,31 @@ public class legends extends Weapons {
         System.out.println("");
         System.out.println("Where on the legend are you shooting? The body, legs, head or");
         System.out.println("would you like to provide a custom situtation?");
-        //System.out.println("NOTICE: Choosing the options of the body, legs, or head will only output the shots required to down a legend if shot at the inputted body part");
         Scanner scanner = new Scanner(System.in);
 
+        String[] possibleSituations = {"body", "legs","head", "custom"};
+        boolean invalidSituationSelected = true;
+       
+        while (invalidSituationSelected == true) {
+            String desiredCalc = scanner.nextLine();  
 
-        String desiredCalc = scanner.nextLine();        
+            for (int i = 0; i < possibleSituations.length; i++) {
+                if (desiredCalc.equals(possibleSituations[i])) {
+                    invalidSituationSelected = false;
+                    bodyPartShotAt = desiredCalc;
+                    break;
+                } 
+            } 
+            if (invalidSituationSelected == false) {
+                break;
+            } else {
+                System.out.println("Situation selection is case sensitive, please try again");
+            }
+        }
+
         
         // if user is shooting a legend in the body
-        if (desiredCalc.equals("The body") || desiredCalc.equals("body")) {
+        if (bodyPartShotAt.equals("The body") || bodyPartShotAt.equals("body")) {
             System.out.println("");
             
             shotsToDown = "It will take " + 
@@ -202,7 +222,7 @@ public class legends extends Weapons {
         } 
         
         // if user is shooting a legend in the legs
-        else if (desiredCalc.equals("legs")) {
+        else if (bodyPartShotAt.equals("legs")) {
             System.out.println("");
             
             shotsToDown = "It will take " + 
@@ -213,7 +233,7 @@ public class legends extends Weapons {
         } 
         
         // if user is shooting a legend in a custom situation
-        else if (desiredCalc.equals("custom")) {
+        else if (bodyPartShotAt.equals("custom")) {
             
             shotsToDown = customShotCalculator(getWeaponUsed(), getCurrentHealth(), getCurrentArmour(), getLegendName());
             System.out.println(shotsToDown);
@@ -221,7 +241,7 @@ public class legends extends Weapons {
         }
         
         // if user is shooting a legend in the head
-        else if (desiredCalc.equals("head")) {
+        else if (bodyPartShotAt.equals("head")) {
             System.out.println("");
             
             shotsToDown = "It will take " + 
@@ -232,7 +252,7 @@ public class legends extends Weapons {
         } 
         
         // if a user wishes to quit
-        else if (desiredCalc.equals("q")) {
+        else if (bodyPartShotAt.equals("q")) {
             return "";
         } 
         
