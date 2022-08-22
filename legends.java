@@ -18,6 +18,8 @@ public class legends extends Weapons {
     "Mad Maggie", "Fade", "Gibraltar", "Caustic", "Wattson",
     "Rampart", "Newcastle", "Lifeline", "Loba", "Bloodhound",
     "Pathfinder", "Crypto", "Valkyrie", "Seer"};
+
+    String equipableArmor [] =  { "white", "blue", "purple", "gold", "red" };
     
     private String legendName = "";
     
@@ -63,7 +65,10 @@ public class legends extends Weapons {
             if (invalidLegendChosen == false) {
                 break;
             } else {
-                System.out.println("NOTICE: legend selection is case sensitive, please choose legends present in the list only");            }
+                System.out.print("NOTICE: legend selection is case sensitive,"); 
+                System.out.print(" please choose legends present in the list only");
+                System.out.println("");           
+            }
            
         }
         
@@ -94,7 +99,6 @@ public class legends extends Weapons {
         System.out.println("What kind of armor does " + legendName + " have?");
         System.out.println("Choose from the following: white, blue, purple, gold, or red armor");
 
-        String equipableArmor [] =  { "white", "blue", "purple", "gold", "red" };
         boolean invalidArmorSelection = true;
 
         while (invalidArmorSelection == true) {
@@ -115,9 +119,8 @@ public class legends extends Weapons {
                 System.out.print(", please try again");
                 System.out.println("");
             }
-            
-            
         } 
+        
         System.out.println("");
         getShotsToDown();
     }
@@ -174,15 +177,8 @@ public class legends extends Weapons {
             } else {
                 System.out.println("Note: weapon selection is case sensitive, please try again");
             }
-            
-            
-        
-
         }
-        
-
-        
-        
+    
         
         System.out.println("");
         System.out.println("Where on the legend are you shooting? The body, legs, head or");

@@ -40,10 +40,6 @@ abstract class Weapons {
 
     private final Double fortifiedModifier = 0.15;
 
-    
-
-    
-    
     /**
      * bodyShotCalculator calculates the body shots
      * required to down a apex legend
@@ -108,6 +104,8 @@ abstract class Weapons {
             }
         }
 
+        currentArmor = armorSlangTranslator (currentArmor);
+
         for(int i = 0; i < useableShields.length; i++) {
             if (currentArmor.equals(useableShields[i])) {
                 totalHealthLeft = currentHealth + shieldHealthValues[i];
@@ -147,6 +145,8 @@ abstract class Weapons {
                 break;
             }
         }
+
+        currentArmor = armorSlangTranslator (currentArmor);
 
         for(int i = 0; i < useableShields.length; i++) {
             if (currentArmor.equals(useableShields[i])) {
@@ -189,7 +189,7 @@ abstract class Weapons {
         System.out.println("You have selected custom!");
         System.out.println("");
     
-        System.out.println("How many body shots  have you hit on the legend?");
+        System.out.println("How many body shots have you hit on the legend?");
         
         Scanner bodyShotscanner = new Scanner(System.in);
         bodyShotsGiven = bodyShotscanner.nextInt();
@@ -268,6 +268,7 @@ abstract class Weapons {
 
     private String armorSlangTranslator (String armorSlang) {
     String translatedArmor = "";
+    
     if (armorSlang.equals("white") || (armorSlang.equals("white ") || (armorSlang.equals(" white")))) {
         translatedArmor = useableShields[0];
         return translatedArmor;
