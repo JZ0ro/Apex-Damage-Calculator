@@ -38,7 +38,10 @@ abstract class Weapons {
 
     Integer [] shieldHealthValues = {50, 75, 100, 100, 125};
 
+    Double [] helmetDamageReduction = {0.20, 0.50, 0.65, 0.65};
+
     private final Double fortifiedModifier = 0.15;
+
 
     /**
      * bodyShotCalculator calculates the body shots

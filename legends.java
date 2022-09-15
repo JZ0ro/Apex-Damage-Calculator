@@ -20,12 +20,16 @@ public class legends extends Weapons {
     "Pathfinder", "Crypto", "Valkyrie", "Seer"};
 
     String equipableArmor [] =  { "white", "blue", "purple", "gold", "red" };
+
+    String equipableHelmet [] = {"white", "blue", "purple", "gold" };
     
     private String legendName = "";
     
     private Integer currentHealth = 0;
    
     private String currentArmour = "";
+
+    private String currentHelmet = "";
     
     private String weaponUsed = "";
 
@@ -119,27 +123,61 @@ public class legends extends Weapons {
                 System.out.print(", please try again");
                 System.out.println("");
             }
-        } 
+        }
         
+        
+        System.out.println("");
+        System.out.println("What kind of helmet does " + getLegendName() + " have?");
+        System.out.println("Choose from the following: white, blue, purple or gold?");
+
+
+        boolean invalidHelmetSelection = true;
+
+        while (invalidHelmetSelection == true) {
+            String legendShotHelmet = currentLegend.nextLine();
+
+            for (int i = 0; i < equipableHelmet.length; i++) {
+                if (legendShotHelmet.equals(equipableHelmet[i])) {
+                    currentHelmet = legendShotHelmet;
+                    invalidHelmetSelection = false;
+                    break;
+                }
+            }
+
+            if (invalidHelmetSelection == false) {
+                break;
+            } else {
+                System.out.print("NOTICE: helmet selection is case sensitive");
+                System.out.print(", please try again");
+                System.out.println("");
+            }
+        }
+        
+
         System.out.println("");
         getShotsToDown();
     }
 
-    public String getLegendName () {
+    private String getLegendName () {
         return legendName;
     }
 
-    public Integer getCurrentHealth () {
+    private Integer getCurrentHealth () {
         return currentHealth;
     }
 
-    public String getCurrentArmour () {
+    private String getCurrentArmour () {
         return currentArmour;
     }
 
-    public String getWeaponUsed() {
+    private String getWeaponUsed() {
         return weaponUsed;
     }
+
+    private String getCurrentHelmet() {
+        return currentHelmet;
+    }
+
 
     
     /**
