@@ -3,7 +3,7 @@ import java.util.Scanner;
 /**
  * Weapons.java contains the possible damage outputs for all the
  * equipable weapons in Apex legends. The damage outputs for each
- * weapon will account for white, blue, purple/gold, and red armor.
+ * weapon will account for white, blue, purple/gold, and red armor/helmet
  * 
  */
 
@@ -38,6 +38,8 @@ abstract class Weapons {
 
     Integer [] shieldHealthValues = {50, 75, 100, 100, 125};
 
+    String [] useableHelmets = {"white", "blue", "purple", "gold"};
+    
     Double [] helmetDamageReduction = {0.20, 0.50, 0.65, 0.65};
 
     private final Double fortifiedModifier = 0.15;
@@ -136,20 +138,39 @@ abstract class Weapons {
         return shotsFired;
     }
 
-    public Integer headShotCalculator (String currentWeapon, Integer currentHealth, String currentArmor, String currentLegend) {
+    public Integer headShotCalculator 
+    (String currentWeapon, Integer currentHealth, String currentArmor, String currentLegend, String currentHelmet) {
+        
         Integer totalHealthLeft = 0;
         Double fortifiedLegendHealth = 0.0;
         Integer weaponDamage = 0;
         Integer shotsFired = 0;
+        int currentHelmetIDX = 0;
 
+
+        currentHelmet = helmetSlangTranslator(currentHelmet);
+
+        for (int i = 0; i < useableShields.length; i++) {
+            if (currentHelmet.equals(useableHelmets[i])) {
+                currentHelmetIDX = i;
+                break;
+            }
+        }
+        
         for (int i = 0; i < useableWeapons.length; i++) {
             if (currentWeapon.equals(useableWeapons[i])) {
-                weaponDamage = headShotDamageValues[i];
+                weaponDamage = (int) (headShotDamageValues[i] - (headShotDamageValues[i] - bodyShotDamageValues[i]) * helmetDamageReduction[currentHelmetIDX]);
                 break;
             }
         }
 
+        
+
         currentArmor = armorSlangTranslator (currentArmor);
+        currentHelmet = helmetSlangTranslator(currentHelmet);
+
+
+        
 
         for(int i = 0; i < useableShields.length; i++) {
             if (currentArmor.equals(useableShields[i])) {
@@ -160,6 +181,7 @@ abstract class Weapons {
         
         
         if (currentLegend.equals("Gibraltar") || currentLegend.equals("Caustic")) {
+        //Calculates Damage taken for fortified legends
 
             Double fortifiedWeaponDamage = ((double)weaponDamage.intValue() - ((double) weaponDamage.intValue() * fortifiedModifier)); 
 
@@ -170,10 +192,11 @@ abstract class Weapons {
         } 
         
         else {
+        //Calculates damage for unfortified legends
             while (totalHealthLeft >= 0) {
-            totalHealthLeft = totalHealthLeft - weaponDamage;
-            shotsFired += 1;
-        }
+                totalHealthLeft = totalHealthLeft - weaponDamage;
+                shotsFired += 1;
+            }
         }
         
         return shotsFired;
@@ -290,8 +313,33 @@ abstract class Weapons {
     } else {
         System.out.println("Error, armor inputted is not in the game. Please try again");
         return "";
-    } 
+        } 
     }
+
+    private String helmetSlangTranslator (String helmetSlang) {
+        String translatedHelmet = "";
+        boolean helmetFound = false;
+        
+        for (int i = 0; i < useableHelmets.length; i++) {
+            if (helmetSlang.equals(useableHelmets[i])) {
+                translatedHelmet = useableHelmets[i];
+                helmetFound = true;
+            }
+        }
+        
+        if (helmetFound == true) {
+            return translatedHelmet;
+        } else {
+            System.out.print("Error, armor selection is CASE SENSITIVE, ");
+            System.out.print("please select from the list provided and try again");
+            System.out.println("");
+        }
+
+
+        
+        return "";
+    }
+    
 }
 
 

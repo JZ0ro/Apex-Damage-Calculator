@@ -279,7 +279,8 @@ public class legends extends Weapons {
             System.out.println("");
             
             shotsToDown = "It will take " + 
-            headShotCalculator(getWeaponUsed(), getCurrentHealth(), getCurrentArmour(), getLegendName()) + " shots to down " + getLegendName();
+            headShotCalculator(getWeaponUsed(), getCurrentHealth(), getCurrentArmour(), 
+            getLegendName(), getCurrentHelmet()) + " shots to down " + getLegendName();
             
             System.out.println(shotsToDown);
             return shotsToDown; 
